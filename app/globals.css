@@ -1,0 +1,2370 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Beaufort Pro";
+  src: url("/fonts/BeaufortPro-Light.otf") format("opentype");
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Printed Moments";
+  src: url("/fonts/Moments.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* ================= NAVBAR (PC, above 1000px) - unchanged ================= */
+/* ================= NAVBAR (PC, above 1000px) ================= */
+.navbar {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  min-height: 120px;
+  padding: 16px clamp(16px, 5vw, 75px);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: #f6f4ee;
+  font-family: var(--font-mulish), sans-serif;
+}
+
+.navbar .left {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+
+.navbar .left img {
+  display: block;
+  width: auto;
+  height: clamp(48px, 6vw, 75px);
+  max-width: min(45vw, 240px);
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.navbar .right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1 1 auto;
+  min-width: 0;
+  gap: clamp(12px, 2vw, 32px);
+}
+
+.navbar .right a {
+  color: #2b2b2b;
+  font-size: clamp(12px, 1.1vw, 14px);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* underline that draws in from the left when you hover a top-level link */
+.navbar .right > a,
+.navbar .nav-link {
+  padding-bottom: 4px;
+  margin-bottom: -4px;
+  background: linear-gradient(currentColor, currentColor) no-repeat left bottom / 0 1px;
+  transition: background-size 0.35s ease;
+}
+
+.navbar .right > a:hover,
+.navbar .right > a:focus-visible,
+.navbar .nav-item:hover > .nav-link,
+.navbar .nav-item:focus-within > .nav-link {
+  background-size: 100% 1px;
+}
+
+/* ---------- DROPDOWNS (desktop) ---------- */
+.navbar .nav-item {
+  position: relative;
+  padding: 18px 0;   /* keeps the hover area continuous down to the dropdown */
+}
+
+.navbar .dropdown {
+  position: absolute;
+  top: 100%;
+  right: -24px;
+  z-index: 30;
+  min-width: calc(100% + 48px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 4px 24px 18px;
+  background: #f6f4ee;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.25s;
+}
+
+.navbar .nav-item:hover > .dropdown,
+.navbar .nav-item:focus-within > .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+.navbar .right .dropdown a {
+  position: relative;
+  display: block;
+  padding: 14px 0;
+  text-align: right;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* thin line that appears under the hovered item */
+.navbar .right .dropdown a::after {
+  content: "";
+  position: absolute;
+  left: -20px;
+  right: -20px;
+  bottom: 6px;
+  height: 1px;
+  background: #2b2b2b;
+  opacity: 0.55;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s ease;
+}
+
+.navbar .right .dropdown a:hover::after,
+.navbar .right .dropdown a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.navbar .contact {
+  flex: 0 0 auto;
+  padding: 10px 20px;
+  border: 1px solid #2b2b2b;
+  border-radius: 50%;
+  background: transparent;
+  color: #2b2b2b;
+  cursor: pointer;
+  font: inherit;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.navbar .contact:hover {
+  background: #2b2b2b;
+  color: #fff;
+}
+
+.menu-toggle {
+  display: none;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: block;
+  height: 2px;
+  margin: 5px 0;
+  background: #2b2b2b;
+}
+
+/* ================= TABLET & MOBILE (1000px and below) =================
+   full-screen menu, dropdowns become tap-to-expand */
+@media (max-width: 1000px) {
+  .navbar {
+    --nav-px: clamp(16px, 4vw, 32px);
+    min-height: 80px;
+    padding: 12px var(--nav-px);
+    gap: 12px;
+  }
+
+  /* logo stays visible above the full-screen menu */
+  .navbar .left {
+    position: relative;
+    z-index: 22;
+  }
+
+  .navbar .left img {
+    height: clamp(46px, 9vw, 62px);
+    max-width: min(65vw, 220px);
+  }
+
+  /* hamburger */
+  .menu-toggle {
+    display: block;
+    position: relative;
+    z-index: 22;
+  }
+
+  /* hamburger turns into a thin X inside a square box */
+  .menu-toggle.open {
+    flex: 0 0 54px;
+    width: 54px;
+    border: 1px solid #2b2b2b;
+  }
+
+  .menu-toggle.open span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 1px;
+    margin: 0;
+  }
+
+  .menu-toggle.open span:nth-child(1) {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  .menu-toggle.open span:nth-child(2) {
+    display: none;
+  }
+
+  .menu-toggle.open span:nth-child(3) {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  /* full-screen panel */
+  .navbar .right {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 21;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 110px var(--nav-px) max(28px, env(safe-area-inset-bottom));
+    box-sizing: border-box;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: #f6f4ee;
+    box-shadow: none;
+  }
+
+  .navbar .right.open {
+    display: flex;
+    animation: navFade 0.25s ease;
+  }
+
+  /* big links */
+  .navbar .right a {
+    display: block;
+    padding: 14px 0;
+    border: 0;
+    font-size: clamp(28px, 7vw, 44px);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  /* no hover underline on touch layouts */
+  .navbar .right > a,
+  .navbar .nav-link {
+    margin-bottom: 0;
+    background: none;
+  }
+
+  /* links centred in the free space, CONTACT stays at the bottom */
+  .navbar .right > a:first-of-type {
+    margin-top: auto;
+  }
+
+  .navbar .right > a:last-of-type {
+    margin-bottom: auto;
+  }
+
+  /* each section takes the full row */
+  .navbar .nav-item {
+    width: 100%;
+    padding: 0;
+  }
+
+  /* arrow after the items with a list; turns down when open */
+  .navbar .right a.has-sub::after {
+    content: "";
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    margin-left: 14px;
+    border-top: 1px solid #2b2b2b;
+    border-right: 1px solid #2b2b2b;
+    transform: rotate(45deg);
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
+    transition: transform 0.25s ease;
+  }
+
+  .navbar .nav-item.expanded > .nav-link.has-sub::after {
+    transform: rotate(135deg);
+    top: -4px;
+  }
+
+  /* the dropdown becomes a simple expanding list */
+  .navbar .dropdown {
+    position: static;
+    display: none;
+    min-width: 0;
+    align-items: flex-start;
+    padding: 0 0 12px 4px;
+    background: transparent;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: none;
+  }
+
+  .navbar .nav-item.expanded > .dropdown {
+    display: flex;
+    animation: navFade 0.25s ease;
+  }
+
+  .navbar .right .dropdown a {
+    padding: 9px 0;
+    font-size: clamp(14px, 3.8vw, 18px);
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+    text-align: left;
+    white-space: normal;
+  }
+
+  .navbar .right .dropdown a::after {
+    display: none;
+  }
+
+  /* oval CONTACT button at the bottom-left */
+  .navbar .right .contact {
+    align-self: flex-start;
+    margin: 24px 0 0;
+    padding: 15px 62px;
+    border: 1px solid #2b2b2b;
+    border-radius: 50%;
+    background: transparent;
+    color: #2b2b2b;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+  }
+
+  .navbar .right .contact:hover {
+    background: #2b2b2b;
+    color: #fff;
+  }
+}
+
+@keyframes navFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* small phones */
+@media (max-width: 360px) {
+  .navbar {
+    --nav-px: 12px;
+  }
+
+  .navbar .right {
+    padding-top: 100px;
+  }
+
+  .navbar .right .contact {
+    padding: 14px 52px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar .contact,
+  .navbar .right > a,
+  .navbar .nav-link,
+  .navbar .dropdown,
+  .navbar .right .dropdown a::after {
+    transition: none;
+  }
+
+  .navbar .right.open,
+  .navbar .nav-item.expanded > .dropdown {
+    animation: none;
+  }
+}
+
+/* ================= HERO ================= */
+.herosec {
+  width: 100%;
+  background-color: #f6f4ee;
+  padding-block: clamp(16px, 2.2vw, 42px) clamp(16px, 1.6vw, 30px);
+  box-sizing: border-box;
+}
+
+/* Desktop: [ family image | text | beach image ] */
+.hero {
+  display: grid;
+  grid-template-columns: 32.5% minmax(0, 1fr) 16%;
+  height: clamp(520px, 42vw, 820px);
+  width: 100%;
+  max-width: 2000px;
+  margin-inline: auto;
+  background-color: #f6f4ee;
+}
+
+.leftimg {
+  min-height: 0;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.leftimg img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* text column: eyebrow on top, headline in the middle, button at bottom */
+.centertext {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 0 clamp(20px, 4vw, 80px);
+  box-sizing: border-box;
+  text-align: left;
+  background-color: #f6f4ee;
+}
+
+.eyebrow {
+  margin: 0;
+  max-width: 34ch;
+  font-family: var(--font-mulish), sans-serif;
+  font-weight: 300;
+  font-size: clamp(11px, 1.05vw, 18px);
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+}
+
+.line h1 {
+  margin: 0;
+  font-family: "Beaufort Pro", serif;
+  font-size: clamp(28px, 3.8vw, 72px);
+  font-weight: 100;
+  line-height: 1.5;
+}
+
+.line h1 span {
+  font-family: "Printed Moments", "Moments", cursive;
+  color: #86b3b3;
+}
+
+.tagline {
+  margin: clamp(20px, 2.6vw, 50px) 0 0;
+  font-family: var(--font-mulish), sans-serif;
+  font-weight: 300;
+  font-size: clamp(13px, 1.1vw, 19px);
+  line-height: 1.8;
+}
+
+.book button {
+  position: relative;
+  padding: 0 0 8px;
+  border: 0;
+  background: transparent;
+  color: #454545;
+  font: inherit;
+  font-size: clamp(12px, 1.05vw, 18px);
+  letter-spacing: 0.13em;
+  cursor: pointer;
+}
+
+.book button::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.book button:hover::after,
+.book button:focus-visible::after {
+  transform: scaleX(0);
+}
+
+/* small beach image sitting at the bottom right */
+.rightimg {
+  display: flex;
+  align-items: flex-end;
+  min-height: 0;
+}
+
+.rightimg img {
+  display: block;
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+}
+
+/* ---------- Tablet & mobile ----------
+   text on top, family image below, beach image hidden */
+@media (max-width: 900px) {
+  .herosec {
+    padding-block: 0;
+  }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+
+  .centertext {
+    order: 1;
+    gap: 28px;
+    padding: 40px clamp(20px, 5vw, 40px) 40px;
+  }
+
+  .eyebrow {
+    max-width: none;
+    font-size: clamp(11px, 3vw, 15px);
+    letter-spacing: 0.02em;
+    text-wrap: balance;
+  }
+
+  .line h1 {
+    font-size: clamp(30px, 8vw, 52px);
+    line-height: 1.35;
+  }
+
+  .tagline {
+    margin-top: 18px;
+    font-size: clamp(14px, 3.6vw, 17px);
+  }
+
+  .leftimg {
+    order: 2;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+  }
+
+  .rightimg {
+    display: none;
+  }
+}
+.eyebrow .nb {
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .centertext {
+    gap: 24px;
+    padding: 32px 20px;
+  }
+
+  .leftimg {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book button::after {
+    transition: none;
+  }
+}
+
+/* ================= HERO 2 ================= */
+.hero2 {
+  min-height: clamp(560px, 66vw, 950px);
+  background-color: #f6f4ee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 60px);
+  padding-block: clamp(32px, 5vw, 80px);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.text1 {
+  width: min(800px, 55vw);
+  margin-left: clamp(20px, 7vw, 100px);
+  background-color: #f6f4ee;
+  min-width: 0;
+}
+
+.hed {
+  display: block;
+  font-size: clamp(26px, 3.4vw, 50px);
+  line-height: 1.3;
+  color: #454545;
+  font-family: var(--font-mulish), sans-serif;
+}
+
+.another {
+  display: flex;
+  gap: clamp(20px, 3vw, 40px);
+  margin-top: clamp(28px, 4vw, 60px);
+  color: gray;
+  width: 100%;
+}
+
+.lefty,
+.righty {
+  width: 50%;
+  min-width: 0;
+  background-color: transparent;
+}
+
+.lefty span {
+  display: block;
+  font-size: clamp(16px, 1.4vw, 20px);
+  line-height: 1.5;
+  font-family: var(--font-mulish), sans-serif;
+}
+
+.lefty p {
+  margin-top: 10px;
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.7;
+  font-family: var(--font-mulish), sans-serif;
+}
+
+.righty p {
+  margin: 0;
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.7;
+  font-family: var(--font-mulish), sans-serif;
+}
+
+.image-hero2 {
+  flex: 0 0 auto;
+  width: clamp(240px, 32vw, 500px);
+  height: clamp(420px, 48vw, 700px);
+  background: transparent;
+}
+
+.image-hero2 img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Tablet & mobile ----------
+   heading -> left text -> image -> right text */
+@media (max-width: 900px) {
+  .hero2 {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    min-height: 0;
+    gap: 24px;
+    padding: 40px clamp(20px, 5vw, 40px);
+  }
+
+  /* unwrap so the children can be reordered */
+  .text1,
+  .another {
+    display: contents;
+  }
+
+  .hed {
+    order: 1;
+    font-size: clamp(26px, 7vw, 42px);
+  }
+
+  .hed br {
+    display: none;
+  }
+
+  .lefty {
+    order: 2;
+    width: 100%;
+    color: gray;
+  }
+
+  .image-hero2 {
+    order: 3;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .righty {
+    order: 4;
+    width: 100%;
+    color: gray;
+  }
+
+  .lefty span {
+    font-size: clamp(17px, 4.4vw, 21px);
+  }
+
+  .lefty p,
+  .righty p {
+    font-size: clamp(15px, 3.8vw, 17px);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero2 {
+    padding: 32px 20px 40px;
+    gap: 20px;
+  }
+
+  .image-hero2 {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+/* ================= BLOCK 3 : WHO WE HELP ================= */
+.block3 {
+  min-height: clamp(700px, 70vw, 1000px);
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: clamp(40px, 6vw, 100px);
+  box-sizing: border-box;
+}
+
+.block3 h1 {
+  margin: 0 0 0 clamp(20px, 7vw, 100px);
+  padding-top: clamp(40px, 7vw, 100px);
+  font-size: clamp(30px, 3.6vw, 50px);
+  font-family: var(--font-mulish), sans-serif;
+  line-height: 1.2;
+}
+
+.block3 h1 span {
+  color: #86b3b3;
+  font-family: "Printed Moments", "Moments", cursive;
+}
+
+/* cards block, pushed towards the right like the original (250px) */
+.inside1 {
+  --shift: clamp(20px, 19vw, 360px);   /* was 13vw / 250px */
+  background-color: white;
+  width: min(1200px, calc(100% - var(--shift) - clamp(16px, 3vw, 40px)));
+  margin: clamp(20px, 3vw, 30px) 0 0 var(--shift);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: clamp(16px, 3vw, 40px);
+}
+
+.box1,
+.box2,
+.box3 {
+  flex: 1 1 0;
+  min-width: 0;
+  background-color: white;
+}
+
+.box1 img,
+.box2 img,
+.box3 img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 380 / 450;
+  object-fit: cover;
+}
+
+.inside1 h2 {
+  font-family: var(--font-mulish), sans-serif;
+  font-size: clamp(18px, 1.6vw, 30px);
+  margin-top: clamp(18px, 2.4vw, 30px);
+  margin-bottom: clamp(14px, 2vw, 30px);
+}
+
+.inside1 span {
+  display: block;
+  color: black;
+  font-family: var(--font-mulish), sans-serif;
+  font-size: clamp(14px, 1.3vw, 16px);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+/* ---------- Tablet & mobile: cards come one by one ---------- */
+@media (max-width: 900px) {
+  .block3 {
+    min-height: 0;
+    padding-bottom: 48px;
+  }
+
+  .block3 h1 {
+    margin-left: clamp(20px, 5vw, 40px);
+    padding-top: 40px;
+    font-size: clamp(30px, 8vw, 42px);
+  }
+
+  .inside1 {
+    --shift: 0px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 48px;
+    width: calc(100% - 2 * clamp(20px, 5vw, 40px));
+    margin: 28px auto 0;
+  }
+
+  .box1,
+  .box2,
+  .box3 {
+    flex: none;
+    width: 100%;
+  }
+
+  .box1 img,
+  .box2 img,
+  .box3 img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .inside1 span {
+    font-size: clamp(15px, 3.8vw, 17px);
+  }
+}
+
+@media (max-width: 480px) {
+  .box1 img,
+  .box2 img,
+  .box3 img {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+/* ================= RUNNING (text over background image) ================= */
+.running {
+  position: relative;
+  width: 100%;
+  height: clamp(380px, 40vw, 780px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* image acts as the background */
+.running img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* dark overlay */
+.running::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgb(0 0 0 / 38%);
+}
+
+/* text sits lower-left, like the design */
+.running-text {
+  margin: 0;
+  max-width: min(1200px, 100%);
+  padding: 0 clamp(20px, 9vw, 180px) clamp(40px, 8vw, 150px);
+  box-sizing: border-box;
+  text-align: left;
+  color: #fff;
+  font-family: "Beaufort Pro", serif;
+  font-size: clamp(22px, 2.75vw, 64px);
+  font-weight: 100;
+  line-height: 1.5;
+}
+
+.running-text em {
+  font-style: italic;
+}
+
+/* ---------- Tablet & mobile ---------- */
+@media (max-width: 900px) {
+  .running {
+    height: clamp(340px, 75vw, 520px);
+  }
+
+  .running-text {
+    padding: 0 clamp(20px, 6vw, 48px) clamp(32px, 7vw, 56px);
+    font-size: clamp(20px, 4.8vw, 32px);
+    line-height: 1.45;
+  }
+
+  /* let the text wrap naturally instead of the fixed line breaks */
+  .running-text br {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .running {
+    height: 380px;
+  }
+
+  .running-text {
+    padding: 0 20px 32px;
+    font-size: clamp(19px, 5.6vw, 24px);
+  }
+}
+
+/* ================= OUR AREAS OF EXPERTISE ================= */
+.our {
+  --gap: clamp(18px, 2.3vw, 42px);   /* space above/below each divider */
+  background-color: white;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(24px, 4.8vw, 90px);
+  align-items: start;
+  width: 100%;
+  max-width: 1920px;
+  margin-inline: auto;
+  padding: clamp(48px, 6vw, 110px) clamp(20px, 6.5vw, 120px) clamp(48px, 8vw, 150px);
+  box-sizing: border-box;
+}
+
+.cont1,
+.cont2,
+.cont3 {
+  min-width: 0;
+  background-color: white;
+}
+
+/* heading: "Our areas of" + big script "expertise" underneath */
+.cont1 p {
+  margin: 0;
+  font-size: clamp(30px, 3.4vw, 52px);
+  font-family: "Beaufort Pro", serif;
+  color: #454545;
+  font-weight: 100;
+  line-height: 1.15;
+}
+
+.cont1 span {
+  display: inline-block;
+  font-size: 1.25em;
+  line-height: 1.1;
+  font-family: "Printed Moments", "Moments", cursive;
+  color: #86b3b3;
+}
+
+/* links */
+.cont2 a,
+.cont3 a {
+  display: block;
+  font-size: clamp(13px, 1.15vw, 15px);
+  letter-spacing: 0.15em;
+  color: #2b2b2b;
+  font-family: var(--font-mulish), sans-serif;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+/* thin dividers */
+.cont2 hr,
+.cont3 hr {
+  height: 0;
+  margin: var(--gap) 0;
+  border: 0;
+  border-top: 1px solid #f1e6d3;
+}
+
+/* ---------- Tablet & mobile: one single list ---------- */
+@media (max-width: 900px) {
+  .our {
+    --gap: 22px;
+    grid-template-columns: 1fr;
+    padding: 32px clamp(20px, 6vw, 48px) 48px;
+  }
+
+  /* heading on one line: "Our areas of expertise" */
+  .cont1 {
+    margin-bottom: 36px;
+  }
+
+  .cont1 p {
+    font-size: clamp(26px, 6.5vw, 36px);
+  }
+
+  .cont1 br {
+    display: none;
+  }
+
+  .cont1 span {
+    display: inline;
+    font-size: 1.25em;
+  }
+
+  .cont2 a,
+  .cont3 a {
+    font-size: 14px;
+  }
+
+  /* divider that joins the two lists (between MARRIAGE and ANXIETY) */
+  .cont3 {
+    margin-top: var(--gap);
+    padding-top: var(--gap);
+    border-top: 1px solid #f1e6d3;
+  }
+}
+
+/* ================= SWING : HOW WE WORK ================= */
+.swing {
+  background-color: #e3d9ca;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: clamp(24px, 4vw, 60px);
+  padding-block: clamp(48px, 14vh, 150px);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* text block (left) */
+.leftt {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 880px;
+  margin-left: clamp(20px, 10vw, 150px);
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(28px, 4vw, 50px);
+}
+
+/* tall image (right) */
+.rightt {
+  flex: 0 0 clamp(200px, 25vw, 350px);
+  min-height: clamp(520px, 60vw, 100vh);
+  background-color: transparent;
+}
+
+.rightt img {
+  display: block;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.no1,
+.no2,
+.no3 {
+  width: 100%;
+  background-color: transparent;
+}
+
+.no1 h3 {
+  margin: 0;
+  font-family: var(--font-mulish), sans-serif;
+  font-weight: 300;
+  font-size: clamp(13px, 1.1vw, 16px);
+  letter-spacing: 0.05em;
+}
+
+.no1 p {
+  margin: clamp(48px, 9vw, 130px) 0 0;
+  font-family: var(--font-mulish), sans-serif;
+  font-weight: 300;
+  font-size: clamp(26px, 2.8vw, 40px);
+  line-height: 1.3;
+  color: black;
+}
+
+.ins {
+  display: flex;
+  gap: clamp(20px, 3vw, 40px);
+  width: 100%;
+}
+
+.in-left,
+.in-right {
+  width: 50%;
+  min-width: 0;
+  background-color: transparent;
+}
+
+.in-left span {
+  display: block;
+  font-family: var(--font-mulish), sans-serif;
+  font-weight: 400;
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.6;
+  letter-spacing: 1px;
+}
+
+.in-left p {
+  margin: 10px 0 0;
+  font-family: var(--font-mulish), sans-serif;
+  font-weight: 300;
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.6;
+  letter-spacing: 1px;
+}
+
+.in-right p {
+  margin: 0;
+  font-family: var(--font-mulish), sans-serif;   /* fixed typo: was "ont-family" */
+  font-weight: 300;
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.6;
+  letter-spacing: 1px;
+  word-spacing: 1px;
+}
+
+.no3 button {
+  position: relative;
+  padding: 0 0 8px;
+  border: 0;
+  background: transparent;
+  color: #454545;
+  font: inherit;
+  font-size: clamp(12px, 1.05vw, 18px);
+  letter-spacing: 0.13em;
+  cursor: pointer;
+}
+
+.no3 button::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.no3 button:hover::after,
+.no3 button:focus-visible::after {
+  transform: scaleX(0);
+}
+
+/* ---------- Tablet & mobile ----------
+   heading -> image -> text 1 -> text 2 -> button */
+@media (max-width: 900px) {
+  .swing {
+    --px: clamp(20px, 6vw, 48px);   /* side padding */
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding-block: 0;
+  }
+
+  /* unwrap so the children can be reordered */
+  .leftt,
+  .no2,
+  .ins {
+    display: contents;
+  }
+
+  .no1,
+  .in-left,
+  .in-right,
+  .no3 {
+    box-sizing: border-box;
+    width: 100%;
+    padding-inline: var(--px);
+  }
+
+  /* 1. heading */
+  .no1 {
+    order: 1;
+    padding-top: 48px;
+    padding-bottom: 32px;
+  }
+
+  .no1 p {
+    margin-top: 28px;
+    font-size: clamp(26px, 7vw, 36px);
+  }
+
+  /* 2. image, full width */
+  .rightt {
+    order: 2;
+    flex: none;
+    width: 100%;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
+  }
+
+  /* 3. first text */
+  .in-left {
+    order: 3;
+    padding-top: 36px;
+  }
+
+  /* 4. second text */
+  .in-right {
+    order: 4;
+    padding-top: 24px;
+  }
+
+  /* 5. button */
+  .no3 {
+    order: 5;
+    padding-top: 32px;
+    padding-bottom: 48px;
+  }
+
+  .in-left span br {
+    display: none;
+  }
+
+  .in-left span,
+  .in-left p,
+  .in-right p {
+    font-size: clamp(15px, 3.9vw, 17px);
+  }
+
+  .no3 button {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .swing {
+    --px: 20px;
+  }
+
+  .no1 {
+    padding-top: 40px;
+  }
+
+  .rightt {
+    aspect-ratio: 1 / 1;
+  }
+
+  .no3 {
+    padding-bottom: 40px;
+  }
+}
+
+/* ===== ORIGINAL (PC) - unchanged ===== */
+.together{
+  background-color: white;
+  height: 110vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left-block{
+  height: 600px;
+  background-color: white;
+  width: 800px;
+}
+.left-block img{
+  height: 100%;
+  width: 100%;
+  object-fit:cover ;
+}
+.right-block{
+  height: 600px;
+  background-color: transparent;
+  width: 630px;
+}
+.right-block p{
+  font-family: var(--font-mulish), sans-serif;
+  font-size: 50px;
+  font-weight: 300;
+  margin-top: 350px;
+}
+
+.right-block span{
+  font-family: "Printed Moments", "Moments", cursive;
+  color: #86b3b3;
+  font-size: 50px;
+}
+
+/* ===== RESPONSIVE (only below 900px, PC is not affected) ===== */
+@media (max-width: 900px) {
+  .together {
+    height: auto;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  .left-block {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .right-block {
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    padding: 36px clamp(20px, 6vw, 48px) 48px;
+  }
+
+  .right-block p {
+    margin-top: 0;
+    font-size: clamp(28px, 7.5vw, 40px);
+    line-height: 1.3;
+  }
+
+  .right-block p br {
+    display: none;
+  }
+
+  .right-block span {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .left-block {
+    aspect-ratio: 1 / 1;
+  }
+
+  .right-block {
+    padding: 28px 20px 40px;
+  }
+}
+
+.special{
+  background-color: transparent;
+  height: 150vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.space1{
+  height: 80%;
+  background-color: transparent;
+  width: 400px;
+}
+.space1 p{
+  font-family: var(--font-mulish), sans-serif;
+  font-size: 50px;
+  font-weight: 300;
+  text-align:center;
+}
+.space1 span{
+  font-family: "Printed Moments", "Moments", cursive;
+  color: #86b3b3;
+  font-size: 40px;
+}
+.space2{
+  height: 80%;
+  background-color: transparent;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.space3{
+  height: 80%;
+  background-color: transparent;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.in1{
+  height: 330px;
+  background-color: transparent;
+  width: 100%;
+}
+.in2{
+  height: 330px;
+  background-color: transparent;
+  width: 100%;
+}
+.in3{
+  height: 330px;
+  background-color: transparent;
+  width: 100%;
+}
+.in4{
+  height: 330px;
+  background-color: transparent;
+  width: 100%;
+}
+.in1 h2{
+  font-size: 27px;
+  font-family: var(--font-mulish), sans-serif;
+}
+.in1 p{
+  font-size: 18px;
+  font-family: var(--font-mulish), sans-serif;
+  margin-top: 35px;
+  word-spacing: 1px;
+  letter-spacing: 1px;
+}
+
+.in1 button{
+  font-size: 17px;
+  font-family: var(--font-mulish), sans-serif;
+  margin-top: 25px;
+   position: relative;
+  padding: 0 0 8px;
+  border: 0;
+  background: transparent;
+  color: #454545;
+  font: inherit;
+  font-size: clamp(12px, 1.05vw, 18px);
+  letter-spacing: 0.13em;
+  cursor: pointer;
+  align-items: flex-end;
+}
+
+
+.in1 button::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.in1 button:hover::after,
+.in1 button:focus-visible::after {
+  transform: scaleX(0);
+}
+
+.in2 h2{
+  font-size: 27px;
+  font-family: var(--font-mulish), sans-serif;
+}
+.in2 p{
+  font-size: 18px;
+  font-family: var(--font-mulish), sans-serif;
+  margin-top: 20px;
+  word-spacing: 1px;
+  letter-spacing: 1px;
+}
+
+.in2 button{
+  font-size: 17px;
+  font-family: var(--font-mulish), sans-serif;
+  margin-top: 20px;
+   position: relative;
+  padding: 0 0 8px;
+  border: 0;
+  background: transparent;
+  color: #454545;
+  font: inherit;
+  font-size: clamp(12px, 1.05vw, 18px);
+  letter-spacing: 0.13em;
+  cursor: pointer;
+}
+
+
+.in2 button::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.in2 button:hover::after,
+.in2 button:focus-visible::after {
+  transform: scaleX(0);
+}
+
+.in3 h2{
+  font-size: 27px;
+  font-family: var(--font-mulish), sans-serif;
+}
+.in3 p{
+  font-size: 18px;
+  font-family: var(--font-mulish), sans-serif;
+  margin-top: 20px;
+  word-spacing: 1px;
+  letter-spacing: 1px;
+}
+
+.in3 button{
+  font-size: 17px;
+  font-family: var(--font-mulish), sans-serif;
+  margin-top: 20px;
+   position: relative;
+  padding: 0 0 8px;
+  border: 0;
+  background: transparent;
+  color: #454545;
+  font: inherit;
+  font-size: clamp(12px, 1.05vw, 18px);
+  letter-spacing: 0.13em;
+  cursor: pointer;
+}
+
+
+.in3 button::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.in3 button:hover::after,
+.in3 button:focus-visible::after {
+  transform: scaleX(0);
+}
+
+.in4 h2{
+  font-size: 27px;
+  font-family: var(--font-mulish), sans-serif;
+}
+.in4 p{
+  font-size: 18px;
+  font-family: var(--font-mulish), sans-serif;
+  margin-top: 20px;
+  word-spacing: 1px;
+  letter-spacing: 1px;
+}
+
+.in4 button{
+  font-size: 17px;
+  font-family: var(--font-mulish), sans-serif;
+  margin-top: 20px;
+   position: relative;
+  padding: 0 0 8px;
+  border: 0;
+  background: transparent;
+  color: #454545;
+  font: inherit;
+  font-size: clamp(12px, 1.05vw, 18px);
+  letter-spacing: 0.13em;
+  cursor: pointer;
+}
+
+
+.in4 button::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(1);
+  transform-origin: left;
+  transition: transform 0.5s ease;
+}
+
+.in4 button:hover::after,
+.in4 button:focus-visible::after {
+  transform: scaleX(0);
+}
+
+/* ===== RESPONSIVE (only below 900px, PC is not affected) ===== */
+@media (max-width: 900px) {
+  .special {
+    height: auto;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 40px;
+    padding: 48px clamp(20px, 6vw, 48px);
+    box-sizing: border-box;
+  }
+
+  .space1,
+  .space2,
+  .space3 {
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    margin-inline: 0;
+  }
+
+  .space2,
+  .space3 {
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 40px;
+  }
+
+  .in1,
+  .in2,
+  .in3,
+  .in4 {
+    height: auto;
+  }
+
+  .space1 p {
+    margin: 0;
+    text-align: left;
+    font-size: clamp(30px, 8vw, 42px);
+    line-height: 1.25;
+    
+  }
+
+  .space1 span {
+    font-size: 0.8em;
+  }
+
+  .in1 h2,
+  .in2 h2,
+  .in3 h2,
+  .in4 h2 {
+    margin: 0;
+    font-size: clamp(22px, 6vw, 27px);
+  }
+
+  .in1 p,
+  .in2 p,
+  .in3 p,
+  .in4 p {
+    margin-top: 16px;
+    font-weight: 200;
+    font-size: clamp(15px, 3.9vw, 17px);
+    line-height: 1.6;
+  }
+
+  .in1 button,
+  .in2 button,
+  .in3 button,
+  .in4 button {
+    margin-top: 20px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .special {
+    gap: 32px;
+    padding: 40px 20px;
+  }
+
+  .space2,
+  .space3 {
+    gap: 32px;
+  }
+}
+
+/* ===== ORIGINAL (PC, 1280px and up) - unchanged ===== */
+.appointment{
+  background-color: #F6F4EE;
+  height: 130vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.inn{
+  height: 65%;
+  width: 100%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.b1{
+  height: 78%;
+  width: 180px;
+  background-color: transparent;
+  align-self: flex-end;
+}
+
+.b1 img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.b2{
+  height: 100%;
+  width: 525px;
+  background-color: transparent;
+  margin-right: 30px;
+  
+}
+
+.b2 h3{
+  font-size: 18px;
+  font-family: var(--font-mulish), sans-serif;
+  font-weight: 300;
+  
+}
+
+.b2 h1{
+  font-size: 50px;
+  font-family: "Beaufort Pro", serif;
+  margin-top: 80px;
+}
+
+.b2 h1 span{
+  font-family: "Printed Moments", "Moments", cursive;
+  color: #86b3b3;
+}
+
+.b2 p{
+  font-size: 18px;
+  margin-top: 10px;
+  font-family: var(--font-mulish), sans-serif;
+  letter-spacing: 1px;
+  font-weight: 300;
+}
+.b2 pre{
+  font-size: 18px;
+  font-family: var(--font-mulish), sans-serif;
+  letter-spacing: 1px;
+  font-weight: 400;
+  margin-top: 20px
+}
+.b2 button{
+  padding: 10px 20px;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin-top: 28px;
+  font-size: 14px;
+  font-family: var(--font-mulish), sans-serif;
+  font-weight: 400;
+  transition: all 0.15s ease-in;
+}
+.b2 button:hover{
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+.b3{
+  height: 100%;
+  width: 525px;
+  background-color: white;
+}
+
+.b3 img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* ===== LAPTOP / TABLET LANDSCAPE (901px to 1279px) =====
+   same 3-column layout, but fluid so nothing overflows */
+@media (max-width: 1279px) {
+  .appointment {
+    height: auto;
+    padding-block: clamp(48px, 7vw, 90px);
+    overflow-x: hidden;
+  }
+
+  .inn {
+    height: clamp(520px, 60vw, 700px);
+  }
+
+  .b1 {
+    width: 14vw;
+  }
+
+  .b2 {
+    width: 40vw;
+    height: auto;
+    margin-right: 2vw;
+  }
+
+  .b3 {
+    width: 38vw;
+  }
+
+  .b2 h1 {
+    margin-top: clamp(32px, 5vw, 80px);
+    font-size: clamp(32px, 4vw, 50px);
+    line-height: 1.25;
+  }
+
+  .b2 h3 {
+    font-size: clamp(14px, 1.5vw, 18px);
+  }
+
+  .b2 p,
+  .b2 pre {
+    font-size: clamp(14px, 1.55vw, 18px);
+    line-height: 1.7;
+    white-space: pre-wrap;
+  }
+
+  .b2 button {
+    margin-top: 24px;
+  }
+}
+
+/* ===== TABLET PORTRAIT & MOBILE (900px and below) =====
+   everything stacks: small image, text, big image */
+@media (max-width: 900px) {
+  .appointment {
+    height: auto;
+    display: block;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  .inn {
+    height: auto;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  /* 1. small image, flush left at the top */
+  .b1 {
+    width: 38%;
+    height: auto;
+    aspect-ratio: 2 / 1;
+    align-self: flex-start;
+  }
+
+  /* 2. text block */
+  .b2 {
+    width: 100%;
+    height: auto;
+    margin-right: 0;
+    padding: clamp(36px, 9vw, 64px) clamp(20px, 6vw, 56px);
+    box-sizing: border-box;
+  }
+
+  .b2 h3 {
+    font-size: clamp(14px, 3.4vw, 17px);
+    letter-spacing: 0.08em;
+  }
+
+  .b2 h1 {
+    margin: 32px 0 0;
+    max-width: 640px;
+    font-size: clamp(30px, 7vw, 44px);
+    font-weight: 300;
+    line-height: 1.3;
+  }
+
+  .b2 p {
+    max-width: 640px;
+    margin-top: 18px;
+    font-size: clamp(15px, 2.6vw, 17px);
+    line-height: 1.75;
+  }
+
+  .b2 pre {
+    margin: 18px 0 0;
+    font-size: clamp(15px, 2.6vw, 17px);
+    line-height: 1.6;
+    white-space: pre-wrap;
+  }
+
+  .b2 button {
+    margin-top: 26px;
+    padding: 12px 26px;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    background: transparent;
+  }
+
+  .b2 button:hover {
+    background: black;
+  }
+
+  /* 3. bottom image, pushed to the right edge */
+  .b3 {
+    width: 66%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    align-self: flex-end;
+  }
+}
+
+/* small tablets & large phones */
+@media (max-width: 600px) {
+  .b1 {
+    width: 42%;
+  }
+
+  .b3 {
+    width: 70%;
+    aspect-ratio: 5 / 4;
+  }
+}
+
+/* small phones */
+@media (max-width: 380px) {
+  .b2 {
+    padding: 32px 18px;
+  }
+
+  .b2 h1 {
+    font-size: 28px;
+  }
+}
+
+/* ===== ORIGINAL (PC, 1400px and up) - unchanged ===== */
+.footer{
+  background-color: transparent;
+  width: 100%;
+  height: 495px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.card1{
+  background-color: transparent;
+  height: 400px;
+  width: 450px;
+}
+.card1 img{
+  width: 100%;
+  object-fit: cover;
+  
+}
+.card1 p{
+  margin-left: 30px;
+  margin-top: 23px;
+  font-size: 18px;
+  font-family: var(--font-mulish), sans-serif;
+  font-weight: 300;
+  
+}
+
+.card2{
+  background-color: transparent;
+  height: 400px;
+  width: 900px;
+  display: flex;
+  font-family: var(--font-mulish), sans-serif;
+}
+
+
+
+.in-card1{
+  height: 100%;
+  width: 33.333%;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+.in-card2{
+  height: 100%;
+  width: 33.333%;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+.in-card3{
+  height: 100%;
+  width: 33.333%;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.card2 h2{
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.card2 a{
+  font-size: 15px;
+  font-weight: 300;
+  margin-top: 5px;
+}
+
+.per{
+  font-size: 15px;
+  margin-top: 5px;
+  font-weight: 300;
+  word-spacing: 1px;
+  letter-spacing: 1px;
+
+
+}
+.par{
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  margin-top: 40px;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+/* ===== LAPTOP / TABLET LANDSCAPE (901px to 1399px) =====
+   same layout, but fluid so nothing overflows */
+@media (max-width: 1399px) {
+  .footer {
+    height: auto;
+    align-items: flex-start;
+    gap: 3vw;
+    padding: clamp(40px, 6vw, 70px) clamp(20px, 4vw, 60px);
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .card1 {
+    height: auto;
+    flex: 0 0 32vw;
+    width: 32vw;
+  }
+
+  .card1 img {
+    display: block;
+    height: auto;
+  }
+
+  .card1 p {
+    margin-left: 2vw;
+    font-size: clamp(14px, 1.5vw, 18px);
+    line-height: 1.7;
+  }
+
+  .card2 {
+    height: auto;
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    gap: 2vw;
+  }
+
+  .in-card1,
+  .in-card2,
+  .in-card3 {
+    height: auto;
+    min-width: 0;
+  }
+
+  .card2 h2,
+  .card2 a,
+  .per,
+  .par {
+    font-size: clamp(13px, 1.3vw, 15px);
+  }
+
+  .card2 a,
+  .per,
+  .par {
+    overflow-wrap: anywhere;   /* long email never overflows */
+  }
+
+  .per,
+  .par {
+    line-height: 1.7;
+  }
+
+  .par {
+    margin-top: 28px;
+  }
+}
+
+/* ===== TABLET PORTRAIT & MOBILE (900px and below) =====
+   logo + text on top, then Navigate, Contact, Our Team stacked */
+@media (max-width: 900px) {
+  .footer {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 40px;
+    padding: 40px clamp(20px, 6vw, 48px) 56px;
+  }
+
+  .card1 {
+    flex: none;
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .card1 img {
+    width: min(100%, 360px);
+  }
+
+  .card1 p {
+    margin: 20px 0 0;
+    font-size: clamp(16px, 4.2vw, 18px);
+    line-height: 1.75;
+  }
+
+  /* the three lists stack in one column */
+  .card2 {
+    flex: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 40px;
+    padding-left: clamp(16px, 5vw, 40px);
+    box-sizing: border-box;
+  }
+
+  .in-card1,
+  .in-card2,
+  .in-card3 {
+    width: 100%;
+  }
+
+  /* order like the design: Navigate, Contact, Our Team */
+  .in-card1 { order: 1; }
+  .in-card3 { order: 2; }
+  .in-card2 { order: 3; }
+
+  .card2 h2 {
+    margin-bottom: 14px;
+    font-size: 15px;
+    letter-spacing: 0.12em;
+  }
+
+  .card2 a {
+    display: block;
+    margin-top: 0;
+    padding: 5px 0;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .per {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  .par {
+    margin-top: 24px;
+    font-size: 15px;
+    font-style: italic;
+    line-height: 1.8;
+  }
+}
+
+/* small phones */
+@media (max-width: 380px) {
+  .footer {
+    padding: 32px 18px 48px;
+    gap: 32px;
+  }
+
+  .card2 {
+    padding-left: 12px;
+    gap: 32px;
+  }
+}
+
+/* ===== ORIGINAL (PC) - unchanged ===== */
+.foot{
+  height: 50px;
+  width: 100%;
+  background-color: #86B3B3;
+  display: flex;
+  color: white;
+  align-items: center;
+  
+  
+}
+
+.foot pre{
+  margin-left: 120px;
+  font-family: var(--font-mulish), sans-serif;
+}
+
+/* ===== LAPTOP / TABLET LANDSCAPE (901px to 1279px) =====
+   same bar, but the left margin scales and the text can wrap */
+@media (max-width: 1279px) {
+  .foot {
+    height: auto;
+    min-height: 50px;
+    box-sizing: border-box;
+    padding-block: 12px;
+  }
+
+  .foot pre {
+    margin-left: clamp(20px, 9vw, 120px);
+    margin-right: 20px;
+    white-space: pre-wrap;
+    font-size: clamp(13px, 1.3vw, 16px);
+    line-height: 1.7;
+  }
+}
+
+/* ===== TABLET PORTRAIT & MOBILE (900px and below) ===== */
+@media (max-width: 900px) {
+  .foot {
+    padding: 16px clamp(20px, 6vw, 48px);
+  }
+
+  .foot pre {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  /* each link stays in one piece when the line wraps */
+  .foot pre a {
+    white-space: nowrap;
+  }
+}
+
+/* small phones */
+@media (max-width: 380px) {
+  .foot {
+    padding: 14px 18px;
+  }
+
+  .foot pre {
+    font-size: 13px;
+  }
+}
+
+/* ================= TYPOGRAPHY SYSTEM =================
+   Keep this at the very end of the file.
+   Only font-family, font-weight, letter-spacing, word-spacing. */
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* 1. DISPLAY HEADINGS: Beaufort Pro Light */
+.line h1,
+.hed,
+.block3 h1,
+.cont1 p,
+.no1 p,
+.running-text,
+.right-block p,
+.space1 p,
+.b2 h1 {
+  font-family: "Beaufort Pro", Georgia, serif;
+  font-weight: 100;
+  letter-spacing: 0;
+  word-spacing: 0;
+}
+
+/* 2. SCRIPT ACCENT WORDS: Printed Moments */
+.line h1 span,
+.cont1 span,
+.block3 h1 span,
+.right-block span,
+.space1 span,
+.b2 h1 span {
+  font-family: "Printed Moments", "Moments", cursive;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0;
+  word-spacing: 0;
+}
+
+/* 3. SMALL UPPERCASE LABELS: Mulish 400, wide tracking */
+.eyebrow,
+.no1 h3,
+.b2 h3,
+.card2 h2,
+.cont2 a,
+.cont3 a {
+  font-family: var(--font-mulish), sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  word-spacing: 0;
+}
+
+/* navbar links */
+.navbar .right a {
+  font-family: var(--font-mulish), sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  word-spacing: 0;
+}
+
+/* 4. BUTTONS */
+.navbar .contact,
+.book button,
+.no3 button,
+.b2 button,
+.in1 button,
+.in2 button,
+.in3 button,
+.in4 button {
+  font-family: var(--font-mulish), sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.13em;
+  word-spacing: 0;
+}
+
+/* 5. CARD / SUB-HEADINGS: Mulish 400 */
+.inside1 h2,
+.in1 h2,
+.in2 h2,
+.in3 h2,
+.in4 h2 {
+  font-family: var(--font-mulish), sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  word-spacing: 0;
+}
+
+/* 6. LEAD SENTENCES: Mulish 400 */
+.lefty span,
+.in-left span {
+  font-family: var(--font-mulish), sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  word-spacing: 0;
+}
+
+/* 7. BODY TEXT: Mulish 300, light tracking */
+.tagline,
+.lefty p,
+.righty p,
+.in-left p,
+.in-right p,
+.inside1 span,
+.in1 p,
+.in2 p,
+.in3 p,
+.in4 p,
+.b2 p,
+.b2 pre,
+.card1 p,
+.card2 a,
+.per,
+.par {
+  font-family: var(--font-mulish), sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  word-spacing: 0;
+}
+
+/* 8. BOTTOM BAR */
+.foot pre {
+  font-family: var(--font-mulish), sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  word-spacing: 0;
+}
+
+/* full-screen menu links on tablet & mobile keep tighter tracking */
+@media (max-width: 1000px) {
+  .navbar .right a {
+    letter-spacing: 0.06em;
+  }
+}
