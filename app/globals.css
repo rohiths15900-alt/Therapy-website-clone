@@ -213,6 +213,7 @@
   }
 
   .navbar .left img {
+    mix-blend-mode: multiply;
     height: clamp(46px, 9vw, 62px);
     max-width: min(65vw, 220px);
   }
