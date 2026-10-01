@@ -1873,16 +1873,27 @@ html {
     white-space: pre-wrap;
   }
 
+  /* Button: always visible, green by default */
   .b2 button {
     margin-top: 26px;
     padding: 12px 26px;
     font-size: 14px;
     letter-spacing: 0.08em;
-    background: transparent;
+    background-color: var(--color-green);
+    color: white;
+    -webkit-tap-highlight-color: transparent;
   }
 
+  /* cancel the sticky black hover on touch */
   .b2 button:hover {
-    background: black;
+    background-color: var(--color-green);
+    color: white;
+  }
+
+  /* must come AFTER hover */
+  .b2 button:active {
+    background-color: black;
+    color: white;
   }
 
   /* 3. Larger image at the bottom */
@@ -1914,6 +1925,24 @@ html {
 
   .b2 h1 {
     font-size: 28px;
+  }
+
+  .b2 button {
+    padding: 12px 18px;
+    letter-spacing: 0.04em;
+  }
+}
+
+
+@media (hover: none) {
+  .b2 button:hover {
+    background-color: var(--color-green);
+    color: white;
+  }
+
+  .b2 button:active {
+    background-color: black;
+    color: white;
   }
 }
 .footer {
