@@ -73,7 +73,7 @@ const Navbar = () => {
       <div className="left">
         <a href="#home" onClick={closeMenu} aria-label="Go to homepage">
           <img
-            src="/images/logo2.png"
+            src="/images/logo3.jpeg"
             alt="Dr. Maya Reynolds, PsyD — Clinical Psychologist"
           />
         </a>
