@@ -11,7 +11,7 @@ const Block3 = () => {
                 <span>Find clarity around worry, tension, overthinking, and the feeling of constantly being on edge. Therapy can help you understand the patterns beneath anxiety and panic while developing practical tools to feel more grounded, regulated, and confident in everyday life.</span>
             </div>
             <div className="box2">
-                <img src="/images/rock.png" alt="" />
+                <img src="/images/rock.PNG" alt="" />
                 <h2>Trauma & Past Experiences</h2>
                 <span>Work through past experiences at a pace that prioritizes safety, stabilization, and regulation. Whether you’re carrying the impact of a single traumatic event or long-standing patterns, therapy offers a supportive space to process what happened and begin moving toward greater emotional freedom. Past experiences may include trauma connected to childhood, relationships, or chronic stress. We’ll work at a pace that prioritizes safety and stabilization, with the goal of helping you feel more regulated in daily life—not just during sessions.</span>
             </div>
