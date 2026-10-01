@@ -208,11 +208,14 @@
   }
 
   .navbar .left {
-    position: relative;
-    z-index: 22;
+    /* position: relative; */
+    /* z-index: 22; */
   }
 
+  /* .navbar .left img { */
   .navbar .left img {
+    position: relative;
+    z-index: 22;
     mix-blend-mode: multiply;
     height: clamp(46px, 9vw, 62px);
     max-width: min(65vw, 220px);
@@ -374,7 +377,6 @@
   .navbar .right {
     padding-top: 100px;
   }
-
   .navbar .right .contact {
     padding: 14px 52px;
   }

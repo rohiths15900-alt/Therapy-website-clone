@@ -6,7 +6,7 @@ const Block3 = () => {
         <h1 className='dad'>How I Can <span>Help</span></h1>
         <div className="inside1">
             <div className="box1">
-                <img src="/images/sat.png" alt="" />
+                <img src="/images/satt.jpg" alt="" />
                 <h2>Anxiety& Panic</h2>
                 <span>Find clarity around worry, tension, overthinking, and the feeling of constantly being on edge. Therapy can help you understand the patterns beneath anxiety and panic while developing practical tools to feel more grounded, regulated, and confident in everyday life.</span>
             </div>
