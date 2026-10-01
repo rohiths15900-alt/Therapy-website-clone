@@ -124,6 +124,7 @@ const Navbar = () => {
         <a href="#office" onClick={closeMenu}>
           OFFICE
         </a>
+        <a href="#" onClick={closeMenu}>FAQS</a>
 
         <a className="contact" href="#contact" onClick={closeMenu}>
           CONTACT
