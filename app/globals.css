@@ -7,6 +7,22 @@
   --color-text: #2b2b2b;
 }
 
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* keeps anchor targets from hiding under the navbar */
+[id] {
+  scroll-margin-top: 90px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 @font-face {
   font-family: "Beaufort Pro";
   src: url("/fonts/BeaufortPro-Light.otf") format("opentype");
