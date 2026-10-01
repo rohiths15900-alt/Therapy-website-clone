@@ -5,22 +5,23 @@ const Hero2 = () => {
     <div className='hero2'>
         <div className="text1">
             <span className='hed'>
-                You’re holding onto hope that life <br />can be better than it is right now.
+                You may look like you're holding it <br />all together. But inside, it can fell <br /> very diffrent.
             </span>
            <div className="another">
              <div className="lefty">
                     <span>
-                        At Conejo Valley Family Counseling we want to make that hope a reality.
+                        We understand that things can feel different inside, even when you seem to have it all together. We’re here to help.
                     </span>
-                    <p>Whether you're an adult seeking personal growth,  looking to work through your trauma, a couple working on your relationship, or a parent looking for support for your child, we provide a compassionate and safe space to help you navigate all of life’s ups and downs. </p>
+                    <p>You’re thoughtful, capable, and used to pushing forward. Yet beneath the surface, you may be dealing with constant worry, overthinking, tension, difficulty sleeping, or the feeling that you’re always waiting for something to go wrong.</p>
                 </div>
                 <div className="righty">
-                    <p>First and foremost, we believe what you’re going through is real, valid, and worthy of support. Our team offers clients in the Newbury Park area and across CA an environment to discover a new life and a deeper sense of self in the midst of their struggles. As we tap into the power of connection and understanding, you can find your footing again and take a transformative path forward.</p>
+                    <p>Maybe past experiences are still affecting your relationships, confidence, or sense of safety. Or years of professional pressure and perfectionism have left you feeling exhausted and disconnected from yourself.</p> <br />
+                    <p>Therapy can give you space to slow down, understand what’s happening, and begin creating a more sustainable way forward.</p>
                 </div>
            </div>
         </div>
         <div className="image-hero2">
-            <img src="/images/quiet-beach.jpg" alt="Quiet beach at the shoreline" />
+            <img src="/images/baby.jpg" alt="Quiet beach at the shoreline" />
         </div>
     </div>
   )

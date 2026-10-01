@@ -5,34 +5,33 @@ const Hero = () => {
     <section className="herosec">
       <div className="hero">
         <div className="leftimg">
-          <img src="/images/hero-family.jpg" alt="Family walking on the beach" />
+          <img src="/images/sit2.jpg" alt="Family walking on the beach" />
         </div>
 
         <div className="centertext">
-            <p className="eyebrow">
-                ONLINE &amp; IN-PERSON COUNSELING IN{' '}
-                <span className="nb">NEWBURY PARK</span> &amp;{' '}
-                <span className="nb">ACROSS CA</span>
-            </p>
+          <p className="eyebrow">
+            ADULT THERAPY IN{' '}
+            <span className="nb">SANTA MONICA, CALIFORNIA</span>
+          </p>
 
           <div className="line">
             <h1>
-              Rebuild your foundation on solid ground and finally begin to{' '}
-              <span>thrive</span>.
+              Feel <span>grounded</span> again. Live with more clarity, confidence, and ease.
+              {/* Rebuild your foundation on solid ground and finally begin to{' '}
+              <span>thrive</span>. */}
             </h1>
             <p className="tagline">
-              Specialized therapy for adults, couples, teens, and children to
-              reflect, heal, and grow.
+              Therapy for adults navigating anxiety, panic, trauma, burnout, and overwhelming stress—with a warm, collaborative approach that brings together practical tools and deeper emotional work.
             </p>
           </div>
 
           <div className="book">
-            <button type="button">BOOK AN APPOINTMENT</button>
+            <button type="button">START YOUR THERAPY JOURNEY </button>
           </div>
         </div>
 
         <div className="rightimg">
-          <img src="/images/quiet-beach.jpg" alt="" />
+          <img src="/images/baby.jpg" alt="" />
         </div>
       </div>
     </section>

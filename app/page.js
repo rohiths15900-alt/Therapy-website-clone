@@ -5,6 +5,8 @@ import Footer from '@/components/Footer'
 import Hero from '@/components/Hero'
 import Hero2 from '@/components/Hero2'
 import Navbar from '@/components/Navbar'
+// import Office from '@/components/Office'
+import Offt from '@/components/Offt'
 import Our from '@/components/Our'
 import Running from '@/components/Running'
 import Special from '@/components/Special'
@@ -25,6 +27,7 @@ const page = () => {
       <Swing/>
       <Together/>
       <Special/>
+      <Offt/>
       <Appointment/>
       <Footer/>
       <Foot/>
@@ -33,3 +36,5 @@ const page = () => {
 }
 
 export default page
+
+

@@ -5,7 +5,7 @@ const Appointment = () => {
     <div className='appointment'>
         <div className="inn">
             <div className="b1">
-                <img src="/images/hand.jpg" alt="" />
+                <img src="/images/im2.png" alt="" />
 
         </div>
         <div className="b2">
@@ -14,15 +14,16 @@ const Appointment = () => {
             <h1>Find a therapist who is the right fit for  <span>you</span>.</h1>
 
             <p>
-                Coming to therapy is a courageous decision, and connecting with the right kind of therapist makes all the difference. We understand that your journey is personal, and we're here to support you with care and understanding every step of the way. Each member of our team brings dedicated expertise and a commitment to support you in your struggles. We want you to feel prioritized, understood, and empowered.
+               Starting therapy is a personal decision. Dr. Maya Reynolds offers warm, collaborative therapy for adults experiencing anxiety, panic, trauma, burnout, and perfectionism. She combines practical tools with deeper reflection, using CBT, EMDR, mindfulness, and body-oriented techniques. Her work prioritizes safety, stabilization, and helping you feel more regulated in daily life.
+She believes therapy works best when you feel respected, understood, and involved in the process. If you’re looking for support that fits the realities of a fast-paced life, schedule a consultation to see if working together feels right.
             </p>
             <pre>Click the button below to schedule an appointment.</pre>
             <button>
-                BOOK NOW
+                SCHEDULE A CONSULTATION
             </button>
         </div>
         <div className="b3">
-            <img src="/images/point.jpg" alt="" />
+            <img src="/images/im1.png" alt="" />
         </div>
         </div>
 

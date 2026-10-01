@@ -7,59 +7,46 @@ const slug = (text) =>
 
 const menus = [
   {
-    id: "team",
-    label: "OUR TEAM",
-    href: "#team",
-    items: [
-      "Jennifer Anderson, LMFT",
-      "Candace Bletscher, AMFT",
-      "Heather Williams-Baumgart, AMFT",
-      "Samantha Johnson, AMFT",
-      "Autumn Bodily, AMFT",
-      "Rosa Gomez, AMFT",
-      "Chad Flores, AMFT",
-    ],
-  },
-  {
     id: "specialties",
     label: "SPECIALTIES",
     href: "#specialties",
     items: [
-      "Dissociation",
-      "Trauma",
-      "Special Needs Parenting",
-      "Couples",
-      "Children & Teens",
-      "Anxiety & Depression",
-      "Adoption",
+      "Anxiety & Panic",
+      "Trauma & Past Experiences",
+      "Burnout & Perfectionism",
+      "Chronic Stress",
     ],
   },
   {
     id: "methods",
     label: "METHODS",
     href: "#methods",
-    items: ["EMDR", "Brainspotting", "Somatic Therapy", "Parts Work Therapy"],
+    items: [
+      "Cognitive Behavioral Therapy (CBT)",
+      "EMDR",
+      "Mindfulness-Based Practices",
+      "Body-Oriented Techniques",
+    ],
   },
 ];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openSub, setOpenSub] = useState(null); // which section is expanded on mobile
+  const [openSub, setOpenSub] = useState(null);
 
   const closeMenu = () => {
     setMenuOpen(false);
     setOpenSub(null);
   };
 
-  // lock page scroll while the full-screen menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
+
     return () => {
       document.body.style.overflow = "";
     };
   }, [menuOpen]);
 
-  // close the menu if the window grows back to desktop size
   useEffect(() => {
     const onResize = () => {
       if (window.innerWidth > 1000) {
@@ -67,14 +54,14 @@ const Navbar = () => {
         setOpenSub(null);
       }
     };
+
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  // on mobile, tapping a parent link expands its list instead of navigating
-  const handleParentClick = (e, id) => {
+  const handleParentClick = (event, id) => {
     if (window.innerWidth <= 1000) {
-      e.preventDefault();
+      event.preventDefault();
       setOpenSub((current) => (current === id ? null : id));
     } else {
       closeMenu();
@@ -82,9 +69,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar">
+    <nav className="navbar" aria-label="Main navigation">
       <div className="left">
-        <img src="/images/logo.png" alt="Logo" />
+        <a href="#home" onClick={closeMenu} aria-label="Go to homepage">
+          <img
+            src="/images/logo2.png"
+            alt="Dr. Maya Reynolds, PsyD — Clinical Psychologist"
+          />
+        </a>
       </div>
 
       <button
@@ -100,7 +92,9 @@ const Navbar = () => {
       </button>
 
       <div className={`right ${menuOpen ? "open" : ""}`}>
-        <a href="#about" onClick={closeMenu}>ABOUT</a>
+        <a href="#about" onClick={closeMenu}>
+          ABOUT
+        </a>
 
         {menus.map((menu) => (
           <div
@@ -112,7 +106,7 @@ const Navbar = () => {
               className="nav-link has-sub"
               aria-haspopup="true"
               aria-expanded={openSub === menu.id}
-              onClick={(e) => handleParentClick(e, menu.id)}
+              onClick={(event) => handleParentClick(event, menu.id)}
             >
               {menu.label}
             </a>
@@ -127,8 +121,13 @@ const Navbar = () => {
           </div>
         ))}
 
-        <a href="#faqs" onClick={closeMenu}>FAQS</a>
-        <button className="contact" onClick={closeMenu}>CONTACT</button>
+        <a href="#office" onClick={closeMenu}>
+          OFFICE
+        </a>
+
+        <a className="contact" href="#contact" onClick={closeMenu}>
+          CONTACT
+        </a>
       </div>
     </nav>
   );

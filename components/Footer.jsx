@@ -1,50 +1,52 @@
-import React from 'react'
+import React from "react";
+// import "./Footer.css";
 
 const Footer = () => {
   return (
-    <div className='footer'>
-        <div className="card1">
-            <img src="/images/logo.png" alt="" />
-            <p>
-                We want to make getting started simple. You’re welcome to come into our office in Newbury Park or schedule virtual appointments from anywhere in CA—whatever works best for you.    
-            </p>
+    <footer className="footer" id="contact">
+      <div className="footer-brand">
+        <a href="#home" className="footer-logo-link" aria-label="Back to home">
+          <img
+            className="footer-logo"
+            src="/images/logo2.png"
+            alt="Dr. Maya Reynolds, PsyD — Clinical Psychologist"
+          />
+        </a>
 
-        </div>
-        <div className="card2">
-            <div className="in-card1">
-                <h2>NAVIGATE</h2>
-                <a href="">Home</a>
-                <a href="">About</a>
-                <a href="">FAQs</a>
-                <a href="">Contact</a>
-            </div>
-            <div className="in-card2">
-                <h2>OUR TEAM</h2>
-                <a href="">Jennifer Anderson</a>
-                <a href="">Heather Williams-Baumgart </a>
-                <a href="">Autumn Bodily </a>
-                <a href="">Candace Bletscher </a>
-                <a href="">Samantha Johnson </a>
-                <a href="">Rosa Gomez </a>
-                <a href="">Chad Flores </a>
-            </div>
-            <div className="in-card3">
-                <h2>CONTACT</h2>
-                <p className='per'>
-                    925 Broadbeck Dr <br />
-                    Suites 200 and 225 <br />
-                    Newbury Park, CA 91320 <br />
-                    info@conejovalleycounseling.com <br />
-                    805.242.3120 <br />
-                </p>
-                <p className='par'>
-                    Serving Thousand Oaks, Westlake Village, Camarillo, Moorpark, & Simi Valley
-                </p>
-            </div>
+        <p className="footer-intro">
+          You don’t have to carry everything alone. <br />
+Find a space to slow down, feel supported, <br /> and make sense of what you’ve been carrying
+        </p>
+      </div>
+
+      <div className="footer-columns">
+        <nav className="footer-column" aria-label="Footer navigation">
+          <h2>NAVIGATE</h2>
+          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#specialties">Specialties</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div className="footer-column">
+          <h2>YOUR THERAPIST</h2>
+          <a href="#about">Dr. Maya Reynolds, PsyD</a>
+          <p>Licensed Clinical Psychologist</p>
         </div>
 
-    </div>
-  )
-}
+        <div className="footer-column footer-contact">
+          <h2>CONTACT</h2>
+          <address>
+            123th Street 45 W
+            <br />
+            Santa Monica, CA 90401
+          </address>
+          <p>In-person therapy in Santa Monica</p>
+          <p>Secure telehealth throughout California</p>
+        </div>
+      </div>
+    </footer>
+  );
+};
 
-export default Footer
+export default Footer;

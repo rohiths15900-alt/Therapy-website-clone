@@ -3,14 +3,15 @@ import React from 'react'
 const Running = () => {
   return (
     <div className='running'>
-        <img src="/images/running.png" alt="Children running on the beach" />
+        <img src="/images/run1.png" alt="Children running on the beach" />
         <p className="running-text">
-          You deserve a place where your story is <br />
-          heard, valued, and understood.{' '}
-          <em>Nothing will be <br /> too heavy for us to carry together.</em>
+          You don’t have to carry everything alone. <br />
+          Find a space to slow down, feel supported,{' '}
+          <em>and make sense of what you’ve been carrying..</em>
         </p>
     </div>
   )
 }
+
 
 export default Running
