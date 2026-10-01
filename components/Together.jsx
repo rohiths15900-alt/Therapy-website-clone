@@ -4,7 +4,7 @@ const Together = () => {
   return (
     <div className='together'>
         <div className="left-block">
-            <img src="/images/fam.png" alt="" />
+            <img src="/images/fam.PNG" alt="" />
         </div>
         <div className="right-block">
             <p>

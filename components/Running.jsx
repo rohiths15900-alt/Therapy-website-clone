@@ -3,7 +3,7 @@ import React from 'react'
 const Running = () => {
   return (
     <div className='running'>
-        <img src="/images/run1.png" alt="Children running on the beach" />
+        <img src="/images/run1.PNG" alt="Children running on the beach" />
         <p className="running-text">
           You don’t have to carry everything alone. <br />
           Find a space to slow down, feel supported,{' '}

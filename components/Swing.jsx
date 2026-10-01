@@ -26,7 +26,7 @@ const Swing = () => {
         </div>
 
         <div className="rightt">
-            <img src="/images/maya.png" alt="Child playing on a swing" />
+            <img src="/images/maya.PNG" alt="Child playing on a swing" />
         </div>
     </div>
   )

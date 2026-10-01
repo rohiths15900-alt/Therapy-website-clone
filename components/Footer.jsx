@@ -8,7 +8,7 @@ const Footer = () => {
         <a href="#home" className="footer-logo-link" aria-label="Back to home">
           <img
             className="footer-logo"
-            src="/images/logo2.png"
+            src="/images/logo2.PNG"
             alt="Dr. Maya Reynolds, PsyD — Clinical Psychologist"
           />
         </a>

@@ -5,7 +5,7 @@ const Appointment = () => {
     <div className='appointment'>
         <div className="inn">
             <div className="b1">
-                <img src="/images/im2.png" alt="" />
+                <img src="/images/im2.PNG" alt="" />
 
         </div>
         <div className="b2">
@@ -23,7 +23,7 @@ She believes therapy works best when you feel respected, understood, and involve
             </button>
         </div>
         <div className="b3">
-            <img src="/images/im1.png" alt="" />
+            <img src="/images/im1.PNG" alt="" />
         </div>
         </div>
 
